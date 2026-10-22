@@ -9,7 +9,8 @@ $cloudModeEnv = filter_var(env('GETFY_CLOUD', false), FILTER_VALIDATE_BOOLEAN);
 $cloudModeFolder = is_dir(base_path('cloud'));
 
 return [
-    'installed' => is_file(base_path('.env')) && filter_var(env('APP_INSTALLED', false), FILTER_VALIDATE_BOOLEAN),
+    // Permite configurar APP_INSTALLED via variáveis do ambiente em plataformas serverless sem arquivo .env.
+    'installed' => filter_var(env('APP_INSTALLED', false), FILTER_VALIDATE_BOOLEAN),
     'cloud_mode' => $cloudModeEnv || $cloudModeFolder,
     'cloud' => [
         'orch_api_base_url' => rtrim((string) env('ORCH_API_BASE_URL', 'https://orch.getfy.cloud'), '/'),
