@@ -78,7 +78,7 @@ return [
      */
     'plugin_store_api_url' => rtrim((string) env('PLUGIN_STORE_API_URL', 'https://getfy.org'), '/'),
 
-    'app_name' => env('GETFY_APP_NAME', env('APP_NAME', 'Dhz.checkout')),
+    'app_name' => env('GETFY_APP_NAME', 'Dhz.checkout'),
     'theme_primary' => env('GETFY_THEME_PRIMARY', '#a78bfa'),
     'app_logo' => env('GETFY_APP_LOGO', ''),
     'app_logo_dark' => env('GETFY_APP_LOGO_DARK', ''),
