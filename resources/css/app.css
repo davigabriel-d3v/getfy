@@ -232,3 +232,35 @@
         box-shadow: inset 0 0 0 1px rgba(167, 139, 250, 0.08);
     }
 }
+
+
+@layer components {
+    .dark aside.fixed {
+        border-right: 1px solid rgba(63, 63, 70, 0.58);
+        background: linear-gradient(180deg, #111116 0%, #09090b 100%);
+    }
+
+    .dark .menu-item-active {
+        color: #ddd6fe;
+    }
+
+    .dark button:focus-visible,
+    .dark a:focus-visible,
+    .dark input:focus-visible,
+    .dark select:focus-visible,
+    .dark textarea:focus-visible {
+        outline: 2px solid rgba(167, 139, 250, 0.8);
+        outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            scroll-behavior: auto !important;
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+}
