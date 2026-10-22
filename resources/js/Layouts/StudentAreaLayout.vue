@@ -6,9 +6,9 @@ import { ChevronDown, LogOut } from 'lucide-vue-next';
 
 const page = usePage();
 const branding = computed(() => page.props.public_branding ?? {});
-const primary = computed(() => branding.value.theme_primary || '#00cc00');
-const appName = computed(() => branding.value.app_name || 'Getfy');
-const logoLight = computed(() => branding.value.app_logo || branding.value.app_logo_icon || 'https://cdn.getfy.cloud/collapsed-logo.png');
+const primary = computed(() => branding.value.theme_primary || '#a78bfa');
+const appName = computed(() => branding.value.app_name || 'Dhz.checkout');
+const logoLight = computed(() => branding.value.app_logo || branding.value.app_logo_icon || '');
 const logoDark = computed(() => branding.value.app_logo_dark || branding.value.app_logo_icon_dark || logoLight.value);
 const user = computed(() => page.props.auth?.user ?? null);
 
@@ -37,11 +37,12 @@ onUnmounted(() => document.removeEventListener('click', onDocumentClick));
         class="min-h-screen bg-zinc-50 text-zinc-900 transition-colors dark:bg-zinc-950 dark:text-zinc-100"
         :style="{ '--color-primary': primary }"
     >
-        <header class="sticky top-0 z-20 border-b border-zinc-200/80 bg-white/90 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/90">
+        <header class="sticky top-0 z-20 border-b border-zinc-200/80 bg-white/90 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/90">
             <div class="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
                 <Link href="/meus-produtos" class="flex shrink-0 items-center">
-                    <img :src="logoLight" :alt="appName" class="h-8 max-w-[160px] object-contain object-left dark:hidden" />
-                    <img :src="logoDark" :alt="appName" class="hidden h-8 max-w-[160px] object-contain object-left dark:block" />
+                    <img v-if="logoLight" :src="logoLight" :alt="appName" class="h-8 max-w-[160px] object-contain object-left dark:hidden" />
+                    <img v-if="logoDark" :src="logoDark" :alt="appName" class="hidden h-8 max-w-[160px] object-contain object-left dark:block" />
+                    <span v-if="!logoLight && !logoDark" class="text-base font-semibold tracking-tight text-zinc-900 dark:text-white">{{ appName }}</span>
                 </Link>
 
                 <div class="flex items-center gap-1.5 sm:gap-2">
