@@ -12,3 +12,4 @@ coverage
 database/database.sqlite
 storage/logs/*.log
 public/build
+# Vercel uses the container runtime defined in vercel.json.
