@@ -13,7 +13,7 @@ const flashError = computed(() => page.props.flash?.error ?? null);
 const branding = computed(() => page.props.public_branding ?? {});
 const primary = computed(() => branding.value.theme_primary || '#a78bfa');
 const appName = computed(() => branding.value.app_name || 'Dhz.checkout');
-const logoLight = computed(() => branding.value.app_logo || branding.value.app_logo_icon || '');
+const logoLight = computed(() => branding.value.app_logo || branding.value.app_logo_icon || branding.value.app_logo_dark || branding.value.app_logo_icon_dark || '');
 const logoDark = computed(() => branding.value.app_logo_dark || branding.value.app_logo_icon_dark || logoLight.value);
 const heroImage = computed(() => branding.value.login_hero_image || '');
 
