@@ -42,3 +42,40 @@ jobs:
       - run: cp .env.example .env
       - run: php artisan key:generate --force
       - run: php artisan test
+
+  postgres-migrations:
+    name: PostgreSQL migration compatibility
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: getfy_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d getfy_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DB_CONNECTION: pgsql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 5432
+      DB_DATABASE: getfy_test
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_SSLMODE: prefer
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: bcmath, curl, dom, fileinfo, gd, intl, mbstring, pdo_pgsql, pgsql, xml, zip
+          coverage: none
+      - run: composer install --no-interaction --prefer-dist --no-progress
+      - run: cp .env.example .env
+      - run: php artisan key:generate --force
+      - run: php artisan migrate --force
