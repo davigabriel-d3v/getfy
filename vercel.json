@@ -12,7 +12,7 @@
   },
   "routes": [
     {
-      "src": "/(.*\\.php)(/.*)?",
+      "src": "/(install(?:/.*)?|.*\\.php)(/.*)?",
       "dest": "/api/index.php"
     },
     {
