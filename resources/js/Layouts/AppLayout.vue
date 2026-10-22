@@ -39,7 +39,7 @@ function onNotificationsUnreadCountUpdate(count) {
 }
 
 watchEffect(() => {
-    const primary = page.props.appSettings?.theme_primary || '#0ea5e9';
+    const primary = page.props.appSettings?.theme_primary || '#a78bfa';
     document.documentElement.style.setProperty('--color-primary', primary);
 });
 </script>
@@ -49,7 +49,7 @@ watchEffect(() => {
         <link rel="icon" :href="faviconHref" type="image/png" sizes="32x32" />
         <link rel="shortcut icon" :href="faviconHref" type="image/png" />
     </Head>
-    <div class="min-h-screen bg-zinc-100 dark:bg-zinc-900">
+    <div class="min-h-screen bg-zinc-100 dark:bg-zinc-950">
         <AppSidebar />
         <slot name="sidebar-after-nav" />
         <Backdrop />
@@ -75,7 +75,7 @@ watchEffect(() => {
             />
             <MobileBottomNav />
             <div
-                class="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl bg-white shadow-sm dark:bg-zinc-800"
+                class="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-zinc-200/70 bg-white shadow-sm dark:border-zinc-800/80 dark:bg-zinc-900/75"
             >
                 <main class="flex-1 min-w-0 overflow-y-auto px-4 pb-24 pt-4 md:px-6 md:pt-6 lg:pb-8">
                     <div
