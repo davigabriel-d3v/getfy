@@ -12,10 +12,10 @@ const flashError = computed(() => page.props.flash?.error ?? null);
 
 const branding = computed(() => page.props.public_branding ?? {});
 const primary = computed(() => branding.value.theme_primary || '#00cc00');
-const appName = computed(() => branding.value.app_name || 'Getfy');
-const logoLight = computed(() => branding.value.app_logo || branding.value.app_logo_icon || 'https://cdn.getfy.cloud/collapsed-logo.png');
+const appName = computed(() => branding.value.app_name || 'Dhz.checkout');
+const logoLight = computed(() => branding.value.app_logo || branding.value.app_logo_icon || '');
 const logoDark = computed(() => branding.value.app_logo_dark || branding.value.app_logo_icon_dark || logoLight.value);
-const heroImage = computed(() => branding.value.login_hero_image || 'https://cdn.getfy.cloud/login.webp');
+const heroImage = computed(() => branding.value.login_hero_image || '');
 
 const redirectAfterLogin = computed(() => page.props.redirect ?? null);
 
@@ -55,17 +55,20 @@ function submit() {
 
             <header class="login-fade relative z-10 flex items-center justify-between gap-4 px-6 pb-2 pt-6 sm:px-8">
                 <img
+                    v-if="logoLight"
                     :src="logoLight"
                     :alt="appName"
                     class="h-11 max-w-[200px] object-contain object-left dark:hidden"
                     @error="retryImageOnError"
                 />
                 <img
+                    v-if="logoDark"
                     :src="logoDark"
                     :alt="appName"
                     class="hidden h-11 max-w-[200px] object-contain object-left dark:block"
                     @error="retryImageOnError"
                 />
+                <span v-if="!logoLight && !logoDark" class="text-lg font-semibold tracking-tight text-zinc-900 dark:text-white">{{ appName }}</span>
                 <ThemeToggler />
             </header>
 
@@ -216,7 +219,7 @@ function submit() {
 
         <!-- Direita: hero -->
         <div
-            class="relative hidden min-h-0 overflow-hidden bg-zinc-200 dark:bg-zinc-900 lg:flex lg:flex-1"
+            class="relative hidden min-h-0 overflow-hidden bg-zinc-950 dark:bg-zinc-950 lg:flex lg:flex-1"
             aria-hidden="true"
         >
             <div
@@ -225,8 +228,8 @@ function submit() {
                     background: `linear-gradient(135deg, color-mix(in srgb, ${primary} 18%, transparent) 0%, transparent 45%, rgba(24, 24, 27, 0.15) 100%)`,
                 }"
             />
-            <img :src="heroImage" alt="" class="h-full w-full object-cover" @error="retryImageOnError" />
-            <div class="absolute inset-0 bg-gradient-to-t from-zinc-900/50 via-zinc-900/10 to-transparent" />
+            <img v-if="heroImage" :src="heroImage" alt="" class="h-full w-full object-cover" @error="retryImageOnError" />
+            <div class="absolute inset-0 bg-gradient-to-br from-violet-500/15 via-zinc-950/20 to-zinc-950/95" />
             <div class="absolute bottom-10 left-10 right-10 max-w-md">
                 <p class="text-sm font-medium uppercase tracking-[0.2em] text-white/70">
                     {{ appName }}
