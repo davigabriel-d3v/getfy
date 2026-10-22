@@ -289,7 +289,7 @@ class HandleInertiaRequests extends Middleware
      */
     private function buildPublicBranding(): array
     {
-        $themePrimary = (string) config('getfy.theme_primary', '#00cc00');
+        $themePrimary = (string) config('getfy.theme_primary', '#a78bfa');
         $pwaTheme = config('getfy.pwa_theme_color');
         $pwaTheme = ($pwaTheme !== null && $pwaTheme !== '') ? (string) $pwaTheme : $themePrimary;
         $favicon = BrandFavicon::publicUrl();
@@ -297,7 +297,7 @@ class HandleInertiaRequests extends Middleware
         $loginHero = ($loginHero !== null && $loginHero !== '') ? (string) $loginHero : '';
 
         return [
-            'app_name' => (string) config('getfy.app_name', 'Getfy'),
+            'app_name' => (string) config('getfy.app_name', 'Dhz.checkout'),
             'theme_primary' => $themePrimary,
             'pwa_theme_color' => $pwaTheme,
             'app_logo' => (string) config('getfy.app_logo'),
