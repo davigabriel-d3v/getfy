@@ -294,7 +294,7 @@ class HandleInertiaRequests extends Middleware
         $pwaTheme = ($pwaTheme !== null && $pwaTheme !== '') ? (string) $pwaTheme : $themePrimary;
         $favicon = BrandFavicon::publicUrl();
         $loginHero = config('getfy.login_hero_image');
-        $loginHero = ($loginHero !== null && $loginHero !== '') ? (string) $loginHero : 'https://cdn.getfy.cloud/login-v2.webp';
+        $loginHero = ($loginHero !== null && $loginHero !== '') ? (string) $loginHero : '';
 
         return [
             'app_name' => (string) config('getfy.app_name', 'Getfy'),
