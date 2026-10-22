@@ -18,12 +18,12 @@
     </script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @if(!empty($openGraph) && is_array($openGraph))
-        <title>{{ e($openGraph['title'] ?? config('getfy.app_name', config('app.name', 'Getfy'))) }}</title>
+        <title>{{ e($openGraph['title'] ?? config('getfy.app_name', config('app.name', 'Dhz.checkout'))) }}</title>
         @if(!empty($openGraph['description']))
             <meta name="description" content="{{ e($openGraph['description']) }}">
         @endif
         <meta property="og:type" content="{{ e($openGraph['type'] ?? 'website') }}">
-        <meta property="og:site_name" content="{{ e($openGraph['site_name'] ?? config('getfy.app_name', config('app.name', 'Getfy'))) }}">
+        <meta property="og:site_name" content="{{ e($openGraph['site_name'] ?? config('getfy.app_name', config('app.name', 'Dhz.checkout'))) }}">
         <meta property="og:title" content="{{ e($openGraph['title'] ?? '') }}">
         @if(!empty($openGraph['description']))
             <meta property="og:description" content="{{ e($openGraph['description']) }}">
@@ -47,17 +47,17 @@
             <meta name="twitter:image" content="{{ e($openGraph['image']) }}">
         @endif
     @else
-        <title>{{ config('getfy.app_name', config('app.name', 'Getfy')) }}</title>
+        <title>{{ config('getfy.app_name', config('app.name', 'Dhz.checkout')) }}</title>
     @endif
     @unless($skipPanelPwa)
     @php
         $wlFavicon = \App\Support\BrandFavicon::publicUrl();
-        $wlAppName = trim((string) config('getfy.app_name', config('app.name', 'Getfy')));
+        $wlAppName = trim((string) config('getfy.app_name', config('app.name', 'Dhz.checkout')));
         if ($wlAppName === '') {
-            $wlAppName = 'Getfy';
+            $wlAppName = 'Dhz.checkout';
         }
         $wlThemeColor = config('getfy.pwa_theme_color');
-        $wlThemeColor = ($wlThemeColor !== null && $wlThemeColor !== '') ? $wlThemeColor : config('getfy.theme_primary', '#0ea5e9');
+        $wlThemeColor = ($wlThemeColor !== null && $wlThemeColor !== '') ? $wlThemeColor : config('getfy.theme_primary', '#a78bfa');
         $wlAppleIcon = \App\Support\PwaIcon::customPublicUrl('192')
             ?? \App\Support\PwaIcon::customPublicUrl('512')
             ?? \App\Support\PwaIcon::publicUrl('192');
