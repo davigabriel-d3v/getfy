@@ -9,7 +9,8 @@ $cloudModeEnv = filter_var(env('GETFY_CLOUD', false), FILTER_VALIDATE_BOOLEAN);
 $cloudModeFolder = is_dir(base_path('cloud'));
 
 return [
-    'installed' => is_file(base_path('.env')) && filter_var(env('APP_INSTALLED', false), FILTER_VALIDATE_BOOLEAN),
+    // Permite configurar APP_INSTALLED via variáveis do ambiente em plataformas serverless sem arquivo .env.
+    'installed' => filter_var(env('APP_INSTALLED', false), FILTER_VALIDATE_BOOLEAN),
     'cloud_mode' => $cloudModeEnv || $cloudModeFolder,
     'cloud' => [
         'orch_api_base_url' => rtrim((string) env('ORCH_API_BASE_URL', 'https://orch.getfy.cloud'), '/'),
@@ -78,12 +79,12 @@ return [
      */
     'plugin_store_api_url' => rtrim((string) env('PLUGIN_STORE_API_URL', 'https://getfy.org'), '/'),
 
-    'app_name' => 'Getfy',
-    'theme_primary' => '#74d909',
-    'app_logo' => 'https://cdn.getfy.cloud/logo-white-v3.png',
-    'app_logo_dark' => 'https://cdn.getfy.cloud/logo-dark-v3.png',
-    'app_logo_icon' => 'https://cdn.getfy.cloud/collapsed-logo-v3.png',
-    'app_logo_icon_dark' => 'https://cdn.getfy.cloud/collapsed-logo-v2.png',
+    'app_name' => env('GETFY_APP_NAME', 'Dhz.checkout'),
+    'theme_primary' => env('GETFY_THEME_PRIMARY', '#a78bfa'),
+    'app_logo' => env('GETFY_APP_LOGO', ''),
+    'app_logo_dark' => env('GETFY_APP_LOGO_DARK', ''),
+    'app_logo_icon' => env('GETFY_APP_LOGO_ICON', ''),
+    'app_logo_icon_dark' => env('GETFY_APP_LOGO_ICON_DARK', ''),
 
     /** White Label plugin (null = default / não aplicado) */
     'login_hero_image' => null,

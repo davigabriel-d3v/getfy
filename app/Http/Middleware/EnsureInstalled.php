@@ -31,7 +31,9 @@ class EnsureInstalled
     {
         $envPath = base_path('.env');
         if (! is_file($envPath)) {
-            return false;
+            // Em plataformas serverless, segredos e flags são injetados pelo ambiente,
+            // sem um arquivo .env persistente no filesystem.
+            return filter_var(env('APP_INSTALLED', false), FILTER_VALIDATE_BOOLEAN);
         }
         $content = file_get_contents($envPath);
 

@@ -1,0 +1,15 @@
+.git
+.github
+.vercel
+.env
+.env.*
+!.env.example
+node_modules
+vendor
+tests
+.phpunit.cache
+coverage
+database/database.sqlite
+storage/logs/*.log
+public/build
+# Vercel uses the container runtime defined in vercel.json.

@@ -182,3 +182,30 @@ Se você deseja apoiar o desenvolvimento diretamente:
 |---|---|
 | Aleatória | `ce05f7d1-27db-4d46-bca5-0a80c621349a` |
 
+
+
+## Deploy na Vercel (Laravel + Vue)
+
+O projeto é uma aplicação Laravel, não um site estático Vite. O arquivo `vercel.json` configura o runtime PHP e envia as rotas dinâmicas para Laravel; os arquivos estáticos continuam sendo servidos a partir de `public/`.
+
+Antes de publicar, configure em **Vercel → Project → Settings → Environment Variables** os valores reais de produção:
+
+- `APP_KEY` (gerada com `php artisan key:generate --show` em ambiente seguro).
+- `APP_URL` com a URL HTTPS pública.
+- `APP_ENV=production`, `APP_DEBUG=false`, `APP_INSTALLED=true`.
+- `DB_CONNECTION=mysql`, `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD` para um banco externo acessível pela Vercel.
+- `TRUSTED_PROXIES=*` para reconhecer o HTTPS e os cabeçalhos encaminhados pela Vercel.
+- Configure também os drivers de sessão, cache, filas e armazenamento de acordo com serviços externos persistentes.
+
+**Importante:** o filesystem de funções serverless é efêmero e não fornece worker de filas persistente. Para uso real de SaaS, uploads devem ir para armazenamento externo persistente (por exemplo, S3 compatível), e filas/agendamentos precisam de workers/cron externos. Execute as migrations de forma controlada antes de abrir o sistema. Não coloque segredos no repositório nem habilite `APP_DEBUG` em produção.
+
+## Identidade visual Dhz.checkout
+
+A interface usa a marca **Dhz.checkout** por padrão e mantém a paleta dark premium. A identidade pode ser ajustada por variáveis de ambiente, sem alterar os componentes:
+
+- `GETFY_APP_NAME`: nome público da plataforma (padrão: `Dhz.checkout`).
+- `GETFY_THEME_PRIMARY`: cor principal em hexadecimal (padrão: `#a78bfa`).
+- `GETFY_APP_LOGO` e `GETFY_APP_LOGO_DARK`: URLs opcionais para os logotipos claro e escuro.
+- `GETFY_APP_LOGO_ICON` e `GETFY_APP_LOGO_ICON_DARK`: URLs opcionais para os ícones compacto claro e escuro.
+
+Depois de alterar variáveis de ambiente em produção, limpe o cache de configuração do Laravel (`php artisan config:clear`) e gere novamente os assets front-end (`npm run build`). Os nomes de variáveis legados foram mantidos para evitar quebrar integrações existentes.
